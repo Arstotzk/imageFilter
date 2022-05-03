@@ -1,0 +1,41 @@
+﻿<Window x:Class="imageFilter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:imageFilter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="460" Width="810">
+    <Grid>
+        <Button Content="Выбрать изображение" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="146"
+                Click="PathDialog" ClickMode="Release"/>
+        <Button Content="Применить фильтры" HorizontalAlignment="Left" Margin="161,10,0,0" VerticalAlignment="Top" Width="146"
+                Click="PathDialog" ClickMode="Release"/>
+        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="312,10,0,0" VerticalAlignment="Top" Width="146"
+                Click="PathDialog" ClickMode="Release"/>
+
+
+        <Grid HorizontalAlignment="Left" Height="376" Margin="10,35,0,0" VerticalAlignment="Top" Width="632" Background="lightgray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Name="imgWithoutFilters" Margin="5" Grid.Column="0"/>
+            <Image Name="imgWithFilters" Margin="5" Grid.Column="1"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="376" Margin="647,35,0,0" VerticalAlignment="Top" Width="135" Background="lightblue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="173*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Grid.Row="0" Margin="5,5,0,0"
+              Click="AddFilter" ClickMode="Release" Height="20"/>
+            <Button Content="Убрать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="76,5,0,0" Grid.Row="0" Height="20"/>
+            <ListBox Name="FiltersList" HorizontalAlignment="Left" Height="326" VerticalAlignment="Top" Width="115" Margin="10,10,0,0" Grid.Row="1" DisplayMemberPath="Name"
+                     MouseDoubleClick="EditFilter"/>
+
+
+        </Grid>
+
+    </Grid>
+</Window>
