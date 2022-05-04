@@ -21,12 +21,10 @@ namespace imageFilter
     /// </summary>
     public partial class AddWindow : Window
     {
-        public Filter chosenFilter;
         ObservableCollection<PropertyValue> collection = null;
         public AddWindow(Filter _chosenFilter)
         {
             InitializeComponent();
-            chosenFilter = _chosenFilter;
             ChosenFilter.ItemsSource = new List<Filter> 
             { new TestFilter(),
               new Dilatation()};

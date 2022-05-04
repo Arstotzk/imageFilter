@@ -34,7 +34,7 @@ namespace imageFilter
 
             Style itemContainerStyle = new Style(typeof(ListBoxItem));
             itemContainerStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
-            itemContainerStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(ListBox_PreviewMouseLeftButtonDown)));
+            itemContainerStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(ListBox_PreviewMouseRightButtonDown)));
             itemContainerStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(ListBox_Drop)));
             FiltersList.ItemContainerStyle = itemContainerStyle;
         }
@@ -56,21 +56,19 @@ namespace imageFilter
         }
         public void AddFilter(object sender, RoutedEventArgs e)
         {
-            AddWindow add = new AddWindow(lastFilter);
-            bool? addRes = add.ShowDialog();
-            if (addRes.HasValue && addRes.Value)
-            {
-                //FiltersList.Items.Add((Filter)ad.ChosenFilter.SelectedItem);
-                _FilterList.Add((Filter)add.ChosenFilter.SelectedItem);
-            }
+            AddWindow addWindow = new AddWindow(lastFilter);
+            bool? addRes = addWindow.ShowDialog();
+            if (addRes.HasValue && addRes.Value) {_FilterList.Add((Filter)addWindow.ChosenFilter.SelectedItem); }
         }
         public void EditFilter(object sender, RoutedEventArgs e)
         {
-            EditWindow edit = new EditWindow();
-            bool? editRes = edit.ShowDialog();
+            EditWindow editWindow = new EditWindow((Filter)FiltersList.SelectedItem);
+            bool? editRes = editWindow.ShowDialog();
             if (editRes.HasValue && editRes.Value)
             {
-
+                int index = _FilterList.IndexOf((Filter)FiltersList.SelectedItem);
+                if (editWindow.deleteFilter == true) { _FilterList.Remove(_FilterList[index]); }
+                else { _FilterList[index] = editWindow.chosenFilter; }
             }
         }
         private void ListBox_Drop(object sender, DragEventArgs e)
@@ -103,7 +101,7 @@ namespace imageFilter
             }
 
         }
-        private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ListBox_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListBoxItem)
             {

@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="EditWindow" Height="410" Width="260">
     <Grid>
-        <ComboBox Name="ChosenFilter" HorizontalAlignment="Left" Margin="81,16,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Name"/>
+        <TextBlock Name="FilterName" HorizontalAlignment="Left" Margin="81,16,0,0" TextWrapping="Wrap" Text="FilterName" VerticalAlignment="Top" Width="151"/>
         <TextBlock HorizontalAlignment="Left" Margin="26,16,0,0" TextWrapping="Wrap" Text="Фильтр:" VerticalAlignment="Top" RenderTransformOrigin="0.576,0.497" Height="22" Width="55"/>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="157,339,0,0" VerticalAlignment="Top" Width="75"
                 Click="OnSave" ClickMode="Release"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="77,339,0,0" VerticalAlignment="Top" Width="75"
+                Click="OnDelete" ClickMode="Release"/>
         <Grid Margin="0,55,0,45">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />

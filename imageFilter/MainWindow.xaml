@@ -15,7 +15,7 @@
                 Click="PathDialog" ClickMode="Release"/>
 
 
-        <Grid HorizontalAlignment="Left" Height="376" Margin="10,35,0,0" VerticalAlignment="Top" Width="632" Background="lightgray">
+        <Grid HorizontalAlignment="Left" Height="376" Margin="161,35,0,0" VerticalAlignment="Top" Width="621" Background="lightgray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -23,15 +23,14 @@
             <Image Name="imgWithoutFilters" Margin="5" Grid.Column="0"/>
             <Image Name="imgWithFilters" Margin="5" Grid.Column="1"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="376" Margin="647,35,0,0" VerticalAlignment="Top" Width="135" Background="lightblue">
+        <Grid HorizontalAlignment="Left" Height="376" Margin="10,35,0,0" VerticalAlignment="Top" Width="146" Background="lightblue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"></RowDefinition>
                 <RowDefinition Height="173*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Grid.Row="0" Margin="5,5,0,0"
+            <Button Content="Добавить фильтр" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Grid.Row="0" Margin="10,5,0,0"
               Click="AddFilter" ClickMode="Release" Height="20"/>
-            <Button Content="Убрать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="76,5,0,0" Grid.Row="0" Height="20"/>
-            <ListBox Name="FiltersList" HorizontalAlignment="Left" Height="326" VerticalAlignment="Top" Width="115" Margin="10,10,0,0" Grid.Row="1" DisplayMemberPath="Name"
+            <ListBox Name="FiltersList" HorizontalAlignment="Left" Height="326" VerticalAlignment="Top" Width="126" Margin="10,10,0,0" Grid.Row="1" DisplayMemberPath="Name"
                      MouseDoubleClick="EditFilter"/>
 
 
