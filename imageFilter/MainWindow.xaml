@@ -10,7 +10,7 @@
         <Button Content="Выбрать изображение" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="146"
                 Click="PathDialog" ClickMode="Release"/>
         <Button Content="Применить фильтры" HorizontalAlignment="Left" Margin="161,10,0,0" VerticalAlignment="Top" Width="146"
-                Click="PathDialog" ClickMode="Release"/>
+                Click="ApplyFilters" ClickMode="Release"/>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="312,10,0,0" VerticalAlignment="Top" Width="146"
                 Click="PathDialog" ClickMode="Release"/>
 

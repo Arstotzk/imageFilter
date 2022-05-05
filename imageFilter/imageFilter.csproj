@@ -95,7 +95,6 @@
     <Compile Include="Filters\Dilatation.cs" />
     <Compile Include="Filters\PropertyValue.cs" />
     <Compile Include="Filters\TestFilter.cs" />
-    <Compile Include="Filters\IFilter.cs" />
     <Compile Include="ImageWithFilters.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

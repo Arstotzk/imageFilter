@@ -24,13 +24,14 @@ namespace imageFilter
     public partial class MainWindow : Window
     {
         private Filter lastFilter = null;
+        private BitmapImage bitmapImgToFilter = null;
 
-        private ObservableCollection<Filter> _FilterList = new ObservableCollection<Filter>();
+        private ObservableCollection<Filter> filterList = new ObservableCollection<Filter>();
 
         public MainWindow()
         {
             InitializeComponent();
-            FiltersList.ItemsSource = _FilterList;
+            FiltersList.ItemsSource = filterList;
 
             Style itemContainerStyle = new Style(typeof(ListBoxItem));
             itemContainerStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
@@ -49,16 +50,21 @@ namespace imageFilter
             {
                 imgWithoutFilters.Source = new BitmapImage(new Uri(ofdPicture.FileName));
                 imgWithFilters.Source = new BitmapImage(new Uri(ofdPicture.FileName));
-                BitmapImage bitmapImgToFilter = new BitmapImage(new Uri(ofdPicture.FileName));
-                TestFilter tf = new TestFilter();
-                imgWithFilters.Source = tf.Apply(bitmapImgToFilter);
+                bitmapImgToFilter = new BitmapImage(new Uri(ofdPicture.FileName));
+                //TestFilter tf = new TestFilter();
+                //imgWithFilters.Source = tf.Apply(bitmapImgToFilter);
             }
+        }
+        public void ApplyFilters(object sender, RoutedEventArgs e) 
+        {
+            ImageWithFilters iwf = new ImageWithFilters(bitmapImgToFilter, filterList);
+            imgWithFilters.Source = iwf.ApllyFilters();
         }
         public void AddFilter(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow(lastFilter);
             bool? addRes = addWindow.ShowDialog();
-            if (addRes.HasValue && addRes.Value) {_FilterList.Add((Filter)addWindow.ChosenFilter.SelectedItem); }
+            if (addRes.HasValue && addRes.Value) {filterList.Add((Filter)addWindow.ChosenFilter.SelectedItem); }
         }
         public void EditFilter(object sender, RoutedEventArgs e)
         {
@@ -66,9 +72,9 @@ namespace imageFilter
             bool? editRes = editWindow.ShowDialog();
             if (editRes.HasValue && editRes.Value)
             {
-                int index = _FilterList.IndexOf((Filter)FiltersList.SelectedItem);
-                if (editWindow.deleteFilter == true) { _FilterList.Remove(_FilterList[index]); }
-                else { _FilterList[index] = editWindow.chosenFilter; }
+                int index = filterList.IndexOf((Filter)FiltersList.SelectedItem);
+                if (editWindow.deleteFilter == true) { filterList.Remove(filterList[index]); }
+                else { filterList[index] = editWindow.chosenFilter; }
             }
         }
         private void ListBox_Drop(object sender, DragEventArgs e)
@@ -87,16 +93,16 @@ namespace imageFilter
 
             if (removedIdx < targetIdx)
             {
-                _FilterList.Insert(targetIdx + 1, droppedData);
-                _FilterList.RemoveAt(removedIdx);
+                filterList.Insert(targetIdx + 1, droppedData);
+                filterList.RemoveAt(removedIdx);
             }
             else
             {
                 int remIdx = removedIdx + 1;
-                if (_FilterList.Count + 1 > remIdx)
+                if (filterList.Count + 1 > remIdx)
                 {
-                    _FilterList.Insert(targetIdx, droppedData);
-                    _FilterList.RemoveAt(remIdx);
+                    filterList.Insert(targetIdx, droppedData);
+                    filterList.RemoveAt(remIdx);
                 }
             }
 
