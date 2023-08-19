@@ -91,10 +91,13 @@
     <Compile Include="EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Filters\Erosion.cs" />
     <Compile Include="Filters\Filter.cs" />
     <Compile Include="Filters\Dilatation.cs" />
+    <Compile Include="Filters\Gauss.cs" />
+    <Compile Include="Filters\Laplacian.cs" />
     <Compile Include="Filters\PropertyValue.cs" />
-    <Compile Include="Filters\TestFilter.cs" />
+    <Compile Include="Filters\Otsu.cs" />
     <Compile Include="ImageWithFilters.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -12,7 +12,7 @@
         <Button Content="Применить фильтры" HorizontalAlignment="Left" Margin="161,10,0,0" VerticalAlignment="Top" Width="146"
                 Click="ApplyFilters" ClickMode="Release"/>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="312,10,0,0" VerticalAlignment="Top" Width="146"
-                Click="PathDialog" ClickMode="Release"/>
+                Click="SaveImage" ClickMode="Release"/>
 
 
         <Grid HorizontalAlignment="Left" Height="376" Margin="161,35,0,0" VerticalAlignment="Top" Width="621" Background="lightgray">

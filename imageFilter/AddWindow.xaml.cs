@@ -21,13 +21,16 @@ namespace imageFilter
     /// </summary>
     public partial class AddWindow : Window
     {
-        ObservableCollection<PropertyValue> collection = null;
+        private ObservableCollection<PropertyValue> collection = null;
         public AddWindow(Filter _chosenFilter)
         {
             InitializeComponent();
             ChosenFilter.ItemsSource = new List<Filter> 
-            { new TestFilter(),
-              new Dilatation()};
+            { new Otsu(),
+              new Dilatation(),
+              new Erosion(),
+              new Gauss(),
+              new Laplacian()};
             ChosenFilter.SelectionChanged += (s, e) => { ChosenFilterChanged(s, e); };
             dgPropetys.ItemsSource = collection;
         }

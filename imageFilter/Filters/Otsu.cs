@@ -11,9 +11,9 @@ using OpenCvSharp;
 
 namespace imageFilter.Filters
 {
-    public class TestFilter : Filter
+    public class Otsu : Filter
     {
-        public TestFilter()
+        public Otsu()
         {
             this.Name = "Метод Оцу";
         }

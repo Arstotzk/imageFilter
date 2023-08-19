@@ -18,19 +18,24 @@ namespace imageFilter
     {
         private BitmapImage bitmapImage { get; set; }
         private ObservableCollection<Filter> filters { get; set; }
+        private BitmapSource bitmapSourceAfterImage { get; set; }
         public ImageWithFilters(BitmapImage _bitmapImage, ObservableCollection<Filter> _filters) 
         {
             bitmapImage = _bitmapImage;
             filters = _filters;
         }
-        public BitmapSource ApllyFilters() 
+        public void ApllyFilters() 
         {
             Mat imgMat = BitmapImageToMat(bitmapImage);
             foreach (Filter filter in filters) 
             {
                 imgMat = filter.Apply(imgMat);
             }
-            return MatToBitmapSource(imgMat);
+            bitmapSourceAfterImage = MatToBitmapSource(imgMat);
+        }
+        public BitmapSource GetBitmapSource()
+        {
+            return bitmapSourceAfterImage;
         }
         private Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
         {

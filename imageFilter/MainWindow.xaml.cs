@@ -25,6 +25,8 @@ namespace imageFilter
     {
         private Filter lastFilter = null;
         private BitmapImage bitmapImgToFilter = null;
+        private ImageWithFilters iwf = null;
+        private bool FilterApplyComplete = false;
 
         private ObservableCollection<Filter> filterList = new ObservableCollection<Filter>();
 
@@ -51,23 +53,26 @@ namespace imageFilter
                 imgWithoutFilters.Source = new BitmapImage(new Uri(ofdPicture.FileName));
                 imgWithFilters.Source = new BitmapImage(new Uri(ofdPicture.FileName));
                 bitmapImgToFilter = new BitmapImage(new Uri(ofdPicture.FileName));
-                //TestFilter tf = new TestFilter();
-                //imgWithFilters.Source = tf.Apply(bitmapImgToFilter);
             }
         }
         public void ApplyFilters(object sender, RoutedEventArgs e) 
         {
-            ImageWithFilters iwf = new ImageWithFilters(bitmapImgToFilter, filterList);
-            imgWithFilters.Source = iwf.ApllyFilters();
+            if (FilterApplyComplete == true) { return; }
+            iwf = new ImageWithFilters(bitmapImgToFilter, filterList);
+            iwf.ApllyFilters();
+            imgWithFilters.Source = iwf.GetBitmapSource();
+            FilterApplyComplete = true;
         }
         public void AddFilter(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow(lastFilter);
             bool? addRes = addWindow.ShowDialog();
             if (addRes.HasValue && addRes.Value) {filterList.Add((Filter)addWindow.ChosenFilter.SelectedItem); }
+            FilterApplyComplete = false;
         }
         public void EditFilter(object sender, RoutedEventArgs e)
         {
+            //Сделать как диалог
             EditWindow editWindow = new EditWindow((Filter)FiltersList.SelectedItem);
             bool? editRes = editWindow.ShowDialog();
             if (editRes.HasValue && editRes.Value)
@@ -75,6 +80,7 @@ namespace imageFilter
                 int index = filterList.IndexOf((Filter)FiltersList.SelectedItem);
                 if (editWindow.deleteFilter == true) { filterList.Remove(filterList[index]); }
                 else { filterList[index] = editWindow.chosenFilter; }
+                FilterApplyComplete = false;
             }
         }
         private void ListBox_Drop(object sender, DragEventArgs e)
@@ -114,6 +120,27 @@ namespace imageFilter
                 ListBoxItem draggedItem = sender as ListBoxItem;
                 DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
                 draggedItem.IsSelected = true;
+            }
+        }
+
+        private void SaveImage(object sender, RoutedEventArgs e)
+        {
+            if (iwf == null && FilterApplyComplete == true)
+            {
+                MessageBox.Show("Сохранение невозможно. Необходимо применить фильтры.");
+                return;
+            }
+            SaveFileDialog sfDlg = new SaveFileDialog();
+            sfDlg.FileName = "ImageAfterFilters";
+            sfDlg.Filter = "JPeg Image|*.jpg|Png Image|*.png";
+            if (sfDlg.ShowDialog() == true)
+            {
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(iwf.GetBitmapSource()));
+                using (var fileStream = sfDlg.OpenFile())
+                {
+                    encoder.Save(fileStream);
+                }
             }
         }
     }

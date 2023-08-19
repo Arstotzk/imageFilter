@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Media.Imaging;
 using OpenCvSharp;
 
 namespace imageFilter.Filters
 {
-    class Dilatation : Filter
+    class Erosion : Filter
     {
         public PropertyValue Size = new PropertyValue();
-        public Dilatation()
+        public Erosion()
         {
-            this.Name = "Дилатация";
+            this.Name = "Эрозия";
             this.Size.Name = "Размер";
             this.Size.Value = 5;
         }
@@ -22,7 +21,7 @@ namespace imageFilter.Filters
             Mat element = Cv2.GetStructuringElement(MorphShapes.Ellipse,
                 new OpenCvSharp.Size(this.Size.Value * 2 + 1, this.Size.Value * 2 + 1),
                 new Point(this.Size.Value, this.Size.Value));
-            Cv2.Dilate(inputMat, outputMat, element);
+            Cv2.Erode(inputMat, outputMat, element);
             return outputMat;
         }
     }
